@@ -111,7 +111,7 @@ void exec_argv(char **argv)
 {
 	pid_t pid;
 
-	if (exec_buitin_commands(argv) == 0)
+	if (exec_builtin_commands(argv) == 0)
 		return;
 
 	pid = fork();
