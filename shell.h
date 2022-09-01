@@ -6,7 +6,7 @@
 
 char **__environ;
 int count_token(char *buffer, char *delim);
-char **tokenization(char *buffer, char *delim, int num_tokens);
+char **tokenize_line(char *buffer, char *delim, int num_tokens);
 void exec_argv(char **argv);
 char *_getenv(const char *name);
 void print_PATH(char *envVar, char *delim);
@@ -25,9 +25,9 @@ typedef struct aliases{
 
 
 int builtin_size();
-void my_exit(char **argv);
-void cd(char **argv);
-void help(char **argv);
+void shell_exit(char **argv);
+void shell_cd(char **argv);
+void shell_help(char **argv);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 int _strlen(const char *s);
