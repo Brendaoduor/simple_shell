@@ -22,7 +22,7 @@ int main(void)
 
 		int_mode = isatty(STDIN_FILENO);
 		if (int_mode == 1)
-			prompt();
+            printf("$ ");
 		num_read = getline(&buffer, &n, stdin);
 		if (num_read < 0)
 		{

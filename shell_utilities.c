@@ -29,7 +29,7 @@ void prompt(void)
 
 char *_getenv(const char *name)
 {
-	int len, i = 0;
+    int len, i = 0;
 
 	if (name == NULL)
 		return (NULL);
@@ -109,15 +109,10 @@ char *append_to_directory(char *directory, char **argv, char *character)
 
 void exec_argv(char **argv)
 {
-	unsigned int ch = '/';
 	pid_t pid;
-	char *command_exec;
 
 	if (exec_buitin_commands(argv) == 0)
 		return;
-	command_exec = argv[0];
-	if (strchr(argv[0], ch) == NULL)
-		command_exec = append_to_directory("/bin", argv, "/");
 
 	pid = fork();
 	if (pid == -1)
@@ -127,15 +122,14 @@ void exec_argv(char **argv)
 	}
 	else if (pid == 0)
 	{
-		if (execve(command_exec, argv, __environ) == -1)
+		if (execve(argv[0], argv, __environ) == -1)
 		{
-			printf("%s: command not found\n", command_exec);
+			printf("%s: command not found\n", argv[0]);
 			return;
 		}
 	}
 	else
 	{
 		wait(NULL);
-		free(command_exec);
 	}
 }
