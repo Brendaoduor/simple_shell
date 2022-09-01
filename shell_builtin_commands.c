@@ -10,7 +10,7 @@ int shell_cd(char **args)
 	}
 	else
 	{
-		if (chdir(args[1] != 0))
+		if (chdir(args[1]) != 0)
 			perror("cd\n");
 	}
 	return (1);
@@ -34,5 +34,6 @@ return (1);
 int shell_exit(char **args)
 {
 	if (args[1] == NULL)
+		return (0);
 	return (0);
 }

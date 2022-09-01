@@ -14,7 +14,7 @@ void print_PATH(char *envVar, char *delim);
 struct builtins
 {
     char *command;
-    void (*func)(char **);
+    int (*func)(char **);
 };
 
 
@@ -25,9 +25,9 @@ typedef struct aliases{
 
 
 int builtin_size();
-void shell_exit(char **args);
-void shell_cd(char **args);
-void shell_help(char **args);
+int shell_exit(char **args);
+int shell_cd(char **args);
+int shell_help(char **args);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 int _strlen(const char *s);
