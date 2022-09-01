@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int count_tokens(char *buffer, char *delim)
+int count_token(char *buffer, char *delim)
 {
 	char *token;
 	int token_no = 0;
@@ -22,10 +22,10 @@ int count_tokens(char *buffer, char *delim)
 	free(token);
 	return (token_no);
 }
-char **tokenization(char *buffer, char *delim, int token_no)
+char **tokenize_line(char *buffer, char *delim, int token_no)
 {
 	char *token = NULL;
-	char **argv; // receives argument passed by user
+	char **argv;
 	int a = 0;
 
 	argv = malloc(sizeof(char *) * token_no);
@@ -49,7 +49,7 @@ char **tokenization(char *buffer, char *delim, int token_no)
 	
 	return (argv);
 }
-char *my_strncpy(char *dest, char *src)
+char *_strncpy(char *dest, char *src)
 {
 	char *copy = dest;
 
@@ -60,7 +60,7 @@ char *my_strncpy(char *dest, char *src)
 	}
 }
 
-int my_strcmp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
 	while ((s1 && s2) != NULL)
 	{
