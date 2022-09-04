@@ -29,7 +29,7 @@ void prompt(void)
 
 char *_getenv(const char *name)
 {
-    int len, i = 0;
+	int len, i = 0;
 
 	if (name == NULL)
 		return (NULL);
