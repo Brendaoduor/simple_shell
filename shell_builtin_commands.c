@@ -39,6 +39,7 @@ void shell_help(char **args)
 
 void shell_exit(char **args)
 {
+	if (args[0] == NULL)
 	exit(0);
 }
 
