@@ -110,10 +110,13 @@ char *append_to_directory(char *directory, char **argv, char *character)
 void exec_argv(char **argv)
 {
 	pid_t pid;
+	char *cmd_path;
 
 	if (exec_builtin_commands(argv) == 0)
 		return;
-
+	/*cmd_path = command_dir(argv);*/
+	cmd_path = append_to_directory("/bin", argv, "/");
+	
 	pid = fork();
 	if (pid == -1)
 	{
@@ -122,7 +125,7 @@ void exec_argv(char **argv)
 	}
 	else if (pid == 0)
 	{
-		if (execve(argv[0], argv, __environ) == -1)
+		if (execve(cmd_path, argv, __environ) == -1)
 		{
 			printf("%s: command not found\n", argv[0]);
 			return;

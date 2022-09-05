@@ -40,5 +40,6 @@ char *append_to_directory(char *directory, char ** argv, char *character);
 void prompt();
 void ctrl_C(int signum);
 int print(char *var, int fd);
+char *command_dir(char **cmd);
 
 #endif
