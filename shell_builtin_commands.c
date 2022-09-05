@@ -32,15 +32,14 @@ void shell_help(char **args)
 		"cd 	change the working directory\n"
 		"exit	exits the shell.\n"
 		"help	print this help text\n";
-
 	printf("%s", helptext);
 	}
 }
 
 
-void shell_exit(char **args __attribute__((unused)))
+void shell_exit(char **args)
 {
-		exit(0);
+	exit(0);
 }
 
 
@@ -61,7 +60,6 @@ int exec_builtin_commands(char **argv)
 		{
 			my_builtin[i].func(argv);
 			return (0);
-			break;
 		}
 	}
 	return (-1);
