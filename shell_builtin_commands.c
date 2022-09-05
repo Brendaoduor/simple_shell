@@ -3,7 +3,13 @@
 #include <stdlib.h>
 #include "shell.h"
 
-int shell_cd(char **args)
+/**
+ * shell_cd - Function to change working directory
+ * @args: Array of commands
+ * Return: Nothing
+ */
+
+void shell_cd(char **args)
 {
 	if (args[1] == NULL)
 	{
@@ -14,11 +20,10 @@ int shell_cd(char **args)
 		if (chdir(args[1]) != 0)
 			perror("cd\n");
 	}
-	return (1);
 }
 
 
-int shell_help(char **args)
+void shell_help(char **args)
 {
 	if (args != NULL)
 	{
@@ -30,15 +35,12 @@ int shell_help(char **args)
 
 	printf("%s", helptext);
 	}
-
-	return (1);
 }
 
 
-int shell_exit(char **args __attribute__((unused)))
+void shell_exit(char **args __attribute__((unused)))
 {
 		exit(0);
-	return (1);
 }
 
 
@@ -55,10 +57,11 @@ int exec_builtin_commands(char **argv)
 
 	for (i = 0; i < builtin_size; i++)
 	{
-		if (_strcmp(argv[0], my_builtin[i].command) == 0)
+		if (_strcmp(my_builtin[i].command, argv[0]) == 0)
 		{
 			my_builtin[i].func(argv);
 			return (0);
+			break;
 		}
 	}
 	return (-1);
