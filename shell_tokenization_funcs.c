@@ -48,7 +48,6 @@ char **tokenize_line(char *buffer, char *delim, int token_no)
 	char **argv;
 	int a = 0;
 
-	
 	argv = malloc(sizeof(char *) * token_no);
 
 	if (argv == NULL)
@@ -67,7 +66,7 @@ char **tokenize_line(char *buffer, char *delim, int token_no)
 		token = strtok(NULL, delim);
 	}
 	argv[a] = NULL;
-	
+
 	return (argv);
 }
 
@@ -84,7 +83,6 @@ void ctrl_C(int signum)
 		print("\n$ ", STDIN_FILENO);
 }
 
-
 /**
  * print - A function that prints to a file descriptor
  * @var: Variable to be printed
@@ -97,13 +95,17 @@ int print(char *var, int fd)
 	return (write(fd, var, _strlen(var)));
 }
 
-
+/**
+ * command_dir - function to search our directory path
+ * @cmd: the arguments passed
+ * Return: returns the path on success
+ */
 char *command_dir(char **cmd)
 {
-    int i = 0;
+	int i = 0;
 	size_t size = 0;
-    struct stat st;
-    char *commandPath = NULL;
+	struct stat st;
+	char *commandPath = NULL;
 	char *envPath;
 	char *cwd = NULL;
 	char **pathTokens;
@@ -114,16 +116,16 @@ char *command_dir(char **cmd)
 	if (cwd == NULL)
 		return (NULL);
 
-    while (pathTokens[i] != NULL)
-    {
-        chdir(pathTokens[i]);
-        if (stat(cmd[0], &st) == 0)
-        {
-            commandPath = append_to_directory(pathTokens[i], cmd, "/");
+	while (pathTokens[i] != NULL)
+	{
+		chdir(pathTokens[i]);
+		if (stat(cmd[0], &st) == 0)
+		{
+		commandPath = append_to_directory(pathTokens[i], cmd, "/");
 			chdir(cwd);
-            break;
-        }
+		break;
+		}
 		i++;
-    }
-    return (commandPath);
+	}
+	return (commandPath);
 }
