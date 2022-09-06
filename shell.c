@@ -27,7 +27,7 @@ int main(void)
 		if (int_mode == 1)
 			print("$ ", STDIN_FILENO);
 		num_read = getline(&buffer, &n, stdin);
-		
+
 		if (num_read == -1)
 		{
 			perror("Error reading line\n");
