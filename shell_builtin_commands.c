@@ -22,7 +22,11 @@ void shell_cd(char **args)
 	}
 }
 
-
+/**
+ * shell_help - prints the help statement when entered
+ * @args: the command entered
+ * Return: returns nothing
+ */
 void shell_help(char **args)
 {
 	if (args != NULL)
@@ -36,14 +40,24 @@ void shell_help(char **args)
 	}
 }
 
-
+/**
+ * shell_exit - exits the shell
+ * @args: the command entered
+ * Return: returns nothing
+ */
 void shell_exit(char **args)
 {
 	if (args != NULL)
 	exit(0);
 }
 
-
+/**
+ * exec_builtin_commands - function executes builtin commands
+ * @argv: the arguments passed
+ * @my_builtin: the struct that shows the builtins in relation
+ * to their corresponding functions
+ * Return: returns 0 for success and -1 for failure
+ */
 int exec_builtin_commands(char **argv)
 {
 	int builtin_size, i;
