@@ -4,6 +4,7 @@
 #define DELIM " \n\t\a\r:"
 #include <string.h>
 
+char **__environ;
 int count_token(char *buffer, char *delim);
 char **tokenize_line(char *buffer, char *delim, int token_no);
 void exec_argv(char **argv);
