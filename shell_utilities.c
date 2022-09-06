@@ -121,7 +121,6 @@ void exec_argv(char **argv)
 	if (strchr(argv[0], ch) == NULL)
 		cmd_path = append_to_directory("/bin", argv, "/");
 
-	cmd_path = command_dir(argv);
 	cmd_path = append_to_directory("/bin", argv, "/");
 
 	pid = fork();
@@ -141,6 +140,5 @@ void exec_argv(char **argv)
 	else
 	{
 		wait(NULL);
-		free(cmd_path);
 	}
 }
