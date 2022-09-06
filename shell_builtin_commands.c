@@ -1,4 +1,4 @@
-#include <stdio.h>
+<F3><F3><F3><F3><F3><F3><F3>#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "shell.h"
@@ -39,7 +39,7 @@ void shell_help(char **args)
 
 void shell_exit(char **args)
 {
-	if (args[0] == NULL)
+	if (args != NULL)
 	exit(0);
 }
 
