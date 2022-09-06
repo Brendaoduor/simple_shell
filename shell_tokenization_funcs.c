@@ -4,6 +4,8 @@
 #include <signal.h>
 #include "shell.h"
 #include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 
 /**
  * count_token - Finds the number of substrings in a string
@@ -93,4 +95,35 @@ void ctrl_C(int signum)
 int print(char *var, int fd)
 {
 	return (write(fd, var, _strlen(var)));
+}
+
+
+char *command_dir(char **cmd)
+{
+    int i = 0;
+	size_t size = 0;
+    struct stat st;
+    char *commandPath = NULL;
+	char *envPath;
+	char *cwd = NULL;
+	char **pathTokens;
+
+	envPath = _getenv("PATH");
+	pathTokens = tokenize_PATH(envPath, DELIM);
+	cwd = getcwd(cwd, size);
+	if (cwd == NULL)
+		return (NULL);
+
+    while (pathTokens[i] != NULL)
+    {
+        chdir(pathTokens[i]);
+        if (stat(cmd[0], &st) == 0)
+        {
+            commandPath = append_to_directory(pathTokens[i], cmd, "/");
+			chdir(cwd);
+            break;
+        }
+		i++;
+    }
+    return (commandPath);
 }
