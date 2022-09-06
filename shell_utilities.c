@@ -110,7 +110,6 @@ char *append_to_directory(char *directory, char **argv, char *character)
 
 void exec_argv(char **argv)
 {
-	extern char **__environ;
 	pid_t pid;
 	char *cmd_path;
 	int ch = '/';
