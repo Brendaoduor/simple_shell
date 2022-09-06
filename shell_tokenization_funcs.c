@@ -39,6 +39,7 @@ int count_token(char *buffer, char *delim)
  * tokenize_line - A function to break strings into substrings
  * @buffer: Pointer to string to be tokenized
  * @delim: Delimiters to be used for tokenization
+ * @token_no: the number of string tokens broken
  * Return: Array of pointers containing the substrings
  */
 
