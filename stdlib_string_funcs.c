@@ -60,15 +60,16 @@ char *_strcpy(char *dest, char *src)
  * _strncmp - A function that works exactly like strcmp
  * @s1: First string
  * @s2: Second string
- * n: How many bytes to comapare atmost
+ * @n: How many bytes to comapare atmost
  * Return: int
  */
 
 int _strncmp(const char *s1, const char *s2, size_t n)
 {
-    int status;
-    status = strncmp(s1, s2, n);
-    return (status);
+	int status;
+
+	status = strncmp(s1, s2, n);
+	return (status);
 }
 
 /**
