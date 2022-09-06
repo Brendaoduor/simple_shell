@@ -1,4 +1,4 @@
-<F3><F3><F3><F3><F3><F3><F3>#include <stdio.h>
+#include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include "shell.h"
@@ -54,7 +54,7 @@ void shell_exit(char **args)
 /**
  * exec_builtin_commands - function executes builtin commands
  * @argv: the arguments passed
- * @my_builtin: the struct that shows the builtins in relation
+ * builtins my_builtin: the struct that shows the builtins in relation
  * to their corresponding functions
  * Return: returns 0 for success and -1 for failure
  */
