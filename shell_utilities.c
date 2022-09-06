@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "shell.h"
 
+
 /**
  * prompt - pritns the prompt for our simple shell
  * Return: Nothing
@@ -114,7 +115,7 @@ void exec_argv(char **argv)
 
 	if (exec_builtin_commands(argv) == 0)
 		return;
-	/*cmd_path = command_dir(argv);*/
+	cmd_path = command_dir(argv);
 	cmd_path = append_to_directory("/bin", argv, "/");
 
 	pid = fork();
@@ -135,4 +136,4 @@ void exec_argv(char **argv)
 	{
 		wait(NULL);
 	}
-}
+i}

@@ -18,7 +18,7 @@ int main(void)
 	size_t n = 0;
 	int int_mode, num_tokens;
 
-	/*signal(SIGINT, ctrl_C);*/
+	signal(SIGINT, ctrl_C);
 
 	while (1)
 	{

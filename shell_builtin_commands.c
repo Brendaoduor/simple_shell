@@ -51,22 +51,36 @@ void shell_exit(char **args)
 	exit(0);
 }
 
+
+/**
+ * struct builtins - it shows the builtins in our shell
+ * @command: the command we entered
+ * @func : function pointer to the actual command in the shell
+ * that would be displayed
+ */
+struct builtins
+{
+	char *command;
+	void (*func)(char **);
+};
+
+
 /**
  * exec_builtin_commands - function executes builtin commands
  * @argv: the arguments passed
- * builtins my_builtin: the struct that shows the builtins in relation
+ * my_builtin: the struct that shows the builtins in relation
  * to their corresponding functions
  * Return: returns 0 for success and -1 for failure
  */
 int exec_builtin_commands(char **argv)
 {
 	int builtin_size, i;
+	
 	struct builtins my_builtin[] = {
 		{"exit", shell_exit},
 		{"cd", shell_cd},
 		{"help", shell_help},
-	};
-
+		};
 	builtin_size = sizeof(my_builtin) / sizeof(struct builtins);
 
 	for (i = 0; i < builtin_size; i++)
