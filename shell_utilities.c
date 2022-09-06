@@ -112,11 +112,20 @@ void exec_argv(char **argv)
 {
 	pid_t pid;
 	char *cmd_path;
+	int ch = '/';
 
 	if (exec_builtin_commands(argv) == 0)
 		return;
+<<<<<<< HEAD
+	/*cmd_path = command_dir(argv);*/
+	cmd_path = argv[0];
+	if (strchr(argv[0], ch) == NULL)
+		cmd_path = append_to_directory("/bin", argv, "/");
+
+=======
 	cmd_path = command_dir(argv);
 	cmd_path = append_to_directory("/bin", argv, "/");
+>>>>>>> d277d12f50179cdc72b8c5a0bd9efb23b8ee48e4
 
 	pid = fork();
 	if (pid == -1)
@@ -135,5 +144,6 @@ void exec_argv(char **argv)
 	else
 	{
 		wait(NULL);
+		free(cmd_path);
 	}
 i}
