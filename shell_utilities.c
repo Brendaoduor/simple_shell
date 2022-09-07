@@ -95,7 +95,8 @@ char *append_to_directory(char *directory, char **argv, char *character)
 
 /**
  * exec_argv - Function to execute command
- * @argv: An array of commands to be executed
+ * @arg: An array of commands to be executed
+ * @argv: Argument vectors from main.c
  * Return: Nothing
  */
 

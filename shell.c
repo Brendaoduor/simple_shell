@@ -7,6 +7,8 @@
 
 /**
  * main - Enrty point for our unix command line interpreter
+ * @argc: Argument counter
+ * @argv: Argument vectors
  * Return: 0 on succes
  */
 
