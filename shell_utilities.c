@@ -41,6 +41,7 @@ char **tokenize_PATH(char *envVar, char *delim)
 	char **tokenized_path = NULL;
 	ssize_t num_substrings;
 	char envVar_duplicate[1024];
+	int i = 0;
 
 	_strcpy(envVar_duplicate, envVar);
 	num_substrings = count_token(envVar_duplicate, delim);
@@ -52,6 +53,12 @@ char **tokenize_PATH(char *envVar, char *delim)
 		exit(EXIT_FAILURE);
 	}
 	tokenized_path = tokenize_line(envVar, delim, num_substrings);
+
+	while (tokenized_path[i])
+	{
+		tokenized_path[i] = tokenized_path[i + 1];
+		i++;
+	}
 
 	return (tokenized_path);
 }
@@ -122,5 +129,7 @@ void exec_argv(char **argv)
 	else
 	{
 		wait(NULL);
+		free(cmd_path);
+		free(argv);
 	}
 }

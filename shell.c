@@ -12,7 +12,8 @@
 
 int main(void)
 {
-	char *buffer = NULL, *duplicate_buffer;
+	char *buffer = NULL;
+	char duplicate_buffer[1024];
 	char **argv;
 	ssize_t num_read;
 	size_t n = 0;
@@ -34,12 +35,6 @@ int main(void)
 			return (-1);
 		}
 
-		duplicate_buffer = malloc(sizeof(char) * num_read);
-		if (duplicate_buffer == NULL)
-		{
-			perror("Error: Malloc unable to allocate memory\n");
-			return (-1);
-		}
 		_strcpy(duplicate_buffer, buffer);
 		num_tokens = count_token(duplicate_buffer, DELIM);
 		argv = tokenize_line(buffer, DELIM, num_tokens);
@@ -49,7 +44,5 @@ int main(void)
 	}
 
 	free(buffer);
-	free(duplicate_buffer);
-	free(argv);
 	return (0);
 }

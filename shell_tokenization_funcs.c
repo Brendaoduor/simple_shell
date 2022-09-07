@@ -31,7 +31,6 @@ int count_token(char *buffer, char *delim)
 		token = strtok(NULL, delim);
 		token_no++;
 	}
-	free(token);
 	return (token_no);
 }
 
