@@ -30,7 +30,6 @@ int main(void)
 
 		if (num_read == -1)
 		{
-			perror("Error reading line\n");
 			free(buffer);
 			exit(EXIT_FAILURE);
 		}
