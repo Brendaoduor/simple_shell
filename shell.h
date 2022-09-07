@@ -9,6 +9,7 @@ int count_token(char *buffer, char *delim);
 char **tokenize_line(char *buffer, char *delim, int token_no);
 void exec_argv(char **argv);
 char *_getenv(const char *name);
+char *_strchr(char *str, int c);
 void print_PATH(char *envVar, char *delim);
 
 /**
