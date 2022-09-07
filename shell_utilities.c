@@ -99,18 +99,18 @@ char *append_to_directory(char *directory, char **argv, char *character)
  * Return: Nothing
  */
 
-void exec_argv(char **argv)
+void exec_argv(char **arg, char **argv)
 {
 	pid_t pid;
 	char *cmd_path;
 	int ch = '/';
 
-	if (exec_builtin_commands(argv) == 0)
+	if (exec_builtin_commands(arg) == 0)
 		return;
 	/*cmd_path = command_dir(argv);*/
-	cmd_path = argv[0];
-	if (_strchr(argv[0], ch) == NULL)
-		cmd_path = append_to_directory("/bin", argv, "/");
+	cmd_path = arg[0];
+	if (_strchr(arg[0], ch) == NULL)
+		cmd_path = append_to_directory("/bin", arg, "/");
 
 	pid = fork();
 	if (pid == -1)
@@ -120,9 +120,9 @@ void exec_argv(char **argv)
 	}
 	else if (pid == 0)
 	{
-		if (execve(cmd_path, argv, __environ) == -1)
+		if (execve(cmd_path, arg, __environ) == -1)
 		{
-			_printf("%s: command not found\n", argv[0]);
+			_printf("%s: 1: %s: not found\n", argv[0], arg[0]);
 			return;
 		}
 	}
@@ -130,6 +130,6 @@ void exec_argv(char **argv)
 	{
 		wait(NULL);
 		free(cmd_path);
-		free(argv);
+		free(arg);
 	}
 }
