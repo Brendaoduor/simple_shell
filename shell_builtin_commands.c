@@ -23,24 +23,6 @@ void shell_cd(char **args)
 }
 
 /**
- * shell_help - prints the help statement when entered
- * @args: the command entered
- * Return: returns nothing
- */
-void shell_help(char **args)
-{
-	if (args != NULL)
-	{
-	char *helptext =
-	"The following are the only commands available\n"
-	"cd	change the working directory\n"
-	"exit	exits the shell.\n"
-	"help	print this help text\n";
-printf("%s", helptext);
-	}
-}
-
-/**
  * shell_exit - exits the shell
  * @args: the command entered
  * Return: returns nothing
@@ -66,7 +48,6 @@ int exec_builtin_commands(char **argv)
 	builtins my_builtin[] = {
 		{"exit", shell_exit},
 		{"cd", shell_cd},
-		{"help", shell_help},
 		};
 
 	builtin_size = sizeof(my_builtin) / sizeof(builtins);
