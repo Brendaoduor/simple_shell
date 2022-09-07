@@ -7,6 +7,7 @@
 extern char **__environ;
 int count_token(char *buffer, char *delim);
 char **tokenize_line(char *buffer, char *delim, int token_no);
+void _puts(char *str);
 void exec_argv(char **argv);
 char *_getenv(const char *name);
 char *_strchr(char *str, int c);

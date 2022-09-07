@@ -21,3 +21,13 @@ char *_strchr(char *str, int c)
 	return (NULL);
 }
 
+
+/**
+ * _puts - prints a string followed by a new line
+ * @str: pointer variable.
+ */
+void _puts(char *str)
+{
+	for (; *str != '\0'; str++)
+		putchar(*str);
+}
