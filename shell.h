@@ -3,6 +3,7 @@
 
 #define DELIM " \n\t\a\r:"
 #include <string.h>
+#include <stdarg.h>
 
 extern char **__environ;
 int count_token(char *buffer, char *delim);
@@ -12,6 +13,25 @@ void exec_argv(char **argv);
 char *_getenv(const char *name);
 char *_strchr(char *str, int c);
 void print_PATH(char *envVar, char *delim);
+
+int _printf(const char *format, ...);
+
+/**
+ * struct Cspecs - structure for format specifiers
+ * @cs: Letter representing format specifier
+ * @f: function pointer
+ * Description: Structure for printf format specifiers
+ */
+
+typedef struct Cspecs
+{
+	char cs;
+	void (*f)();
+} cs_t;
+
+void _putchar_c(char c);
+void _putchar(va_list a);
+void print_str(va_list a);
 
 /**
  * struct builtins - it shows the builtins in our shell

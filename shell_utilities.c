@@ -115,8 +115,7 @@ void exec_argv(char **argv)
 	{
 		if (execve(cmd_path, argv, __environ) == -1)
 		{
-			_puts(argv[0]);
-			perror(": command not found");
+			_printf("%s: command not found\n", argv[0]);
 			return;
 		}
 	}
