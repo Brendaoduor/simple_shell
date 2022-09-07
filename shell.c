@@ -14,6 +14,7 @@
 
 int main(int argc __attribute__((unused)), char **argv)
 {
+
 	char *buffer = NULL;
 	char duplicate_buffer[1024];
 	char **arg;
@@ -26,6 +27,7 @@ int main(int argc __attribute__((unused)), char **argv)
 	while (1)
 	{
 
+
 		int_mode = isatty(STDIN_FILENO);
 		if (int_mode == 1)
 			print("$ ", STDIN_FILENO);
@@ -33,7 +35,6 @@ int main(int argc __attribute__((unused)), char **argv)
 
 		if (num_read == -1)
 		{
-			free(buffer);
 			return (-1);
 		}
 
@@ -45,6 +46,7 @@ int main(int argc __attribute__((unused)), char **argv)
 		exec_argv(arg, argv);
 	}
 
-	free(buffer);
+	free(&buffer);
+	free(arg);
 	return (0);
 }

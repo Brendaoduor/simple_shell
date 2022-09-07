@@ -76,16 +76,14 @@ char *append_to_directory(char *directory, char **argv, char *character)
 	char *temp;
 	int buff_size;
 
+	buff_size = (_strlen(directory) + _strlen(argv[0] + 2));
+	temp = malloc(sizeof(char) * buff_size);
+	if (!temp)
+		return (argv[0]);
+
 	if (directory == NULL)
 		return (argv[0]);
 
-	buff_size = (_strlen(directory) + _strlen(argv[0]) + 1);
-	temp = malloc(sizeof(char) * buff_size);
-	if (temp == NULL)
-	{
-		perror("malloc unable to allocate space\n");
-		exit(EXIT_FAILURE);
-	}
 	_strcpy(temp, directory);
 	_strcat(temp, character);
 	_strcat(temp, argv[0]);
@@ -131,6 +129,8 @@ void exec_argv(char **arg, char **argv)
 	{
 		wait(NULL);
 		free(cmd_path);
+		cmd_path = NULL;
 		free(arg);
+		arg = NULL;
 	}
 }
