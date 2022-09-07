@@ -47,6 +47,7 @@ int main(void)
 		if (argv[0] != NULL)
 		exec_argv(argv);
 	}
+	
 	free(buffer);
 	free(duplicate_buffer);
 	free(argv);
