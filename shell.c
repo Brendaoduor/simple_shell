@@ -31,7 +31,7 @@ int main(void)
 		if (num_read == -1)
 		{
 			free(buffer);
-			exit(EXIT_FAILURE);
+			return (-1);
 		}
 
 		duplicate_buffer = malloc(sizeof(char) * num_read);
@@ -51,4 +51,5 @@ int main(void)
 	free(buffer);
 	free(duplicate_buffer);
 	free(argv);
+	return (0);
 }
