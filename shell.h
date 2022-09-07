@@ -19,11 +19,11 @@ void print_PATH(char *envVar, char *delim);
  * that would be displayed
  * Description: structure for my_builtins
  */
-struct builtins
+typedef struct builtins
 {
 	char *command;
 	void (*func)(char **);
-};
+} builtins;
 
 /**
  * struct aliases - description for the aliases in our shell

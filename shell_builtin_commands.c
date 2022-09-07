@@ -32,11 +32,11 @@ void shell_help(char **args)
 	if (args != NULL)
 	{
 	char *helptext =
-		"The following are the only commands available\n"
-		"cd 	change the working directory\n"
-		"exit	exits the shell.\n"
-		"help	print this help text\n";
-	printf("%s", helptext);
+	"The following are the only commands available\n"
+	"cd	change the working directory\n"
+	"exit	exits the shell.\n"
+	"help	print this help text\n";
+printf("%s", helptext);
 	}
 }
 
@@ -51,6 +51,7 @@ void shell_exit(char **args)
 	exit(0);
 }
 
+
 /**
  * exec_builtin_commands - function executes builtin commands
  * @argv: the arguments passed
@@ -61,13 +62,14 @@ void shell_exit(char **args)
 int exec_builtin_commands(char **argv)
 {
 	int builtin_size, i;
-	
-	struct builtins my_builtin[] = {
+
+	builtins my_builtin[] = {
 		{"exit", shell_exit},
 		{"cd", shell_cd},
 		{"help", shell_help},
 		};
-	builtin_size = sizeof(my_builtin) / sizeof(struct builtins);
+
+	builtin_size = sizeof(my_builtin) / sizeof(builtins);
 
 	for (i = 0; i < builtin_size; i++)
 	{
