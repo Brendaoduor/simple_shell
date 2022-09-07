@@ -6,22 +6,6 @@
 #include <stdlib.h>
 #include "shell.h"
 
-
-/**
- * prompt - pritns the prompt for our simple shell
- * Return: Nothing
- */
-
-void prompt(void)
-{
-	char cwd[1024], *username;
-
-	getcwd(cwd, sizeof(cwd));
-	username = _getenv("USER");
-	printf("@%s:", username);
-	printf("%s$ ", cwd);
-}
-
 /**
  * _getenv - A function that gets env path passed to it
  * @name: Env name to get the path
@@ -131,7 +115,8 @@ void exec_argv(char **argv)
 	{
 		if (execve(cmd_path, argv, __environ) == -1)
 		{
-			printf("%s: command not found\n", argv[0]);
+			_puts(argv[0]);
+			perror(": command not found");
 			return;
 		}
 	}
