@@ -7,6 +7,21 @@
 #include "shell.h"
 
 /**
+ * prompt - prints $ to let user know the program is ready
+ * to takeinput
+ * Return: Nothing
+ */
+
+void prompt(void)
+{
+
+	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
+		flag.interactive = 1;
+	if (flag.interactive)
+		write(STDOUT_FILENO, "$ ", 2);
+}
+
+/**
  * _getenv - A function that gets env path passed to it
  * @name: Env name to get the path
  * Return: A pointer containing the path for the env passed to it
@@ -95,14 +110,16 @@ char *append_to_directory(char *directory, char **argv, char *character)
  * exec_argv - Function to execute command
  * @arg: An array of commands to be executed
  * @argv: Argument vectors from main.c
+ * @count: Argument counter
  * Return: Nothing
  */
 
-void exec_argv(char **arg, char **argv)
+void exec_argv(char **arg, char **argv, int count)
 {
 	pid_t pid;
 	char *cmd_path;
 	int ch = '/';
+	int status;
 
 	if (exec_builtin_commands(arg) == 0)
 		return;
@@ -121,13 +138,13 @@ void exec_argv(char **arg, char **argv)
 	{
 		if (execve(cmd_path, arg, __environ) == -1)
 		{
-			_printf("%s: 1: %s: not found\n", argv[0], arg[0]);
-			return;
+			_printf("%s: %i: %s: not found\n", argv[0], count, arg[0]);
+			exit(EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		wait(NULL);
+		waitpid(pid, &status, WUNTRACED);
 		free(cmd_path);
 		cmd_path = NULL;
 		free(arg);

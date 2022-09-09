@@ -20,17 +20,17 @@ int main(int argc __attribute__((unused)), char **argv)
 	char **arg;
 	ssize_t num_read;
 	size_t n = 0;
-	int int_mode, num_tokens;
+	int num_tokens, count = 0;
+
+	if  (argc < 1)
+		return (-1);
 
 	signal(SIGINT, ctrl_C);
 
 	while (1)
 	{
-
-
-		int_mode = isatty(STDIN_FILENO);
-		if (int_mode == 1)
-			print("$ ", STDIN_FILENO);
+		count++;
+		prompt();
 		num_read = getline(&buffer, &n, stdin);
 
 		if (num_read == -1)
@@ -43,10 +43,12 @@ int main(int argc __attribute__((unused)), char **argv)
 		arg = tokenize_line(buffer, DELIM, num_tokens);
 
 		if (argv[0] != NULL)
-		exec_argv(arg, argv);
+		exec_argv(arg, argv, count);
 	}
+	if (num_read < 0 && flag.interactive)
+		write(STDERR_FILENO, "\n", 1);
 
-	free(&buffer);
 	free(arg);
+	free(buffer);
 	return (0);
 }

@@ -3,6 +3,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "shell.h"
+#include <stdint.h>
+#include <limits.h>
+
+#define HEX 16
+#define DECIMAL 10
 
 /**
  * _putchar_c - putchar function
@@ -48,14 +53,19 @@ void print_str(va_list a)
 
 /**
  * print_int - prints int
+ * @a: variable list
  * Return: Nothing
  */
 
-void print_int(void)
+void print_int(va_list a)
 {
+	char buffer[65];
+	int n;
 
+	n = va_arg(a, int);
+	numberToString(n, DECIMAL, buffer);
+	write(STDOUT_FILENO, &buffer, _strlen(buffer));
 }
-
 
 /**
  * _printf - prints output according to a format.

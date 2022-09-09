@@ -4,17 +4,30 @@
 #define DELIM " \n\t\a\r:"
 #include <string.h>
 #include <stdarg.h>
+#include <stdbool.h>
 
 extern char **__environ;
 int count_token(char *buffer, char *delim);
 char **tokenize_line(char *buffer, char *delim, int token_no);
 void _puts(char *str);
-void exec_argv(char **arg, char **argv);
+void exec_argv(char **arg, char **argv, int count);
 char *_getenv(const char *name);
 char *_strchr(char *str, int c);
 void print_PATH(char *envVar, char *delim);
 
+#include <limits.h>
+#include <stdint.h>
+
+#define HEX 16
+#define DECIMAL 10
+
+void _putchar_c(char c);
+void _putchar(va_list a);
+void print_str(va_list a);
+void print_int(va_list a);
 int _printf(const char *format, ...);
+void unsignedNumberToString(uint64_t, int, char *);
+void numberToString(int64_t, int, char *);
 
 /**
  * struct Cspecs - structure for format specifiers
@@ -29,9 +42,6 @@ typedef struct Cspecs
 	void (*f)();
 } cs_t;
 
-void _putchar_c(char c);
-void _putchar(va_list a);
-void print_str(va_list a);
 
 /**
  * struct builtins - it shows the builtins in our shell
@@ -56,6 +66,18 @@ typedef struct aliases
 	char *alias_name;
 	char *real_name;
 } alias;
+
+/**
+ * struct flags - struct to determine interactive vs non
+ * interactive mode
+ * @interactive: Mode type
+ * Description: Struct for our mode type
+ */
+struct flags
+{
+	bool interactive;
+};
+struct flags flag;
 
 int builtin_size(void);
 void shell_exit(char **args);
