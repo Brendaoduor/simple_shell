@@ -81,6 +81,7 @@ struct flags flag;
 int builtin_size(void);
 void shell_exit(char **args);
 void shell_cd(char **args);
+void print_env(char **args);
 void shell_help(char **args);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);

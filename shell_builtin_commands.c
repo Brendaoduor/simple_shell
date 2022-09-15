@@ -30,6 +30,22 @@ void shell_exit(char **args)
 	exit(0);
 }
 
+/**
+ * print_env - prints env variables
+ * @args: command vector
+ * Return: nothing
+ */
+
+void print_env(char **args __attribute__((unused)))
+{
+	int i = 0;
+
+	while (__environ[i] != NULL)
+	{
+		_printf("%s\n", __environ[i]);
+		i++;
+	}
+}
 
 /**
  * exec_builtin_commands - function executes builtin commands
@@ -45,6 +61,7 @@ int exec_builtin_commands(char **argv)
 	builtins my_builtin[] = {
 		{"exit", shell_exit},
 		{"cd", shell_cd},
+		{"env", print_env},
 		};
 
 	builtin_size = sizeof(my_builtin) / sizeof(builtins);
