@@ -46,5 +46,6 @@ int main(int argc __attribute__((unused)), char **argv)
 		write(STDERR_FILENO, "\n", 1);
 
 	free(duplicate_buffer);
+	free_buffer(arg);
 	return (0);
 }

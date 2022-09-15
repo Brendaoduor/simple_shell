@@ -24,6 +24,7 @@ char *_getenv(const char *name);
 char *_strchr(char *str, int c);
 void print_PATH(char *envVar, char *delim);
 char *_strdup(char *org);
+void free_buffer(char **argv);
 
 #include <limits.h>
 #include <stdint.h>

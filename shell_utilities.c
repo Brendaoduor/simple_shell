@@ -146,5 +146,4 @@ void exec_cmd(char **arg, char **argv, int count)
 	}
 	waitpid(pid, &status, WUNTRACED);
 	free(cmd), cmd = NULL;
-	free(arg), arg = NULL;
 }

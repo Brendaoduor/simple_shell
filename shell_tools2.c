@@ -52,3 +52,20 @@ void numberToString(int64_t number, int base, char *buf)
 	}
 	unsignedNumberToString(number, base, buf);
 }
+/**
+ * free_buffer - function that frees array of pointers
+ * @argv: array of pointers
+ * Return: nothing
+ */
+
+void free_buffer(char **argv)
+{
+	int i = 0;
+
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
