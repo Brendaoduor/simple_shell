@@ -12,10 +12,6 @@ int count_token(char *buffer, char *delim)
 	char *token = NULL;
 	int token_no = 0;
 
-
-		if (buffer == NULL)
-		return (token_no);
-
 	token = strtok(buffer, delim);
 	token_no++;
 

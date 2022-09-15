@@ -11,7 +11,7 @@ int main(int argc __attribute__((unused)), char **argv)
 {
 
 	char *buffer = NULL;
-	char duplicate_buffer[1024];
+	char *duplicate_buffer = NULL;
 	char **arg = NULL;
 	ssize_t num_read;
 	size_t n = 0;
@@ -24,6 +24,7 @@ int main(int argc __attribute__((unused)), char **argv)
 
 	while (exit_loop)
 	{
+
 		count++;
 		exit_loop = prompt();
 		num_read = getline(&buffer, &n, stdin);
@@ -34,7 +35,7 @@ int main(int argc __attribute__((unused)), char **argv)
 			return (-1);
 		}
 
-		_strcpy(duplicate_buffer, buffer);
+		duplicate_buffer = _strdup(buffer);
 		num_tokens = count_token(duplicate_buffer, DELIM);
 		arg = tokenize_line(buffer, DELIM, num_tokens);
 
@@ -44,5 +45,6 @@ int main(int argc __attribute__((unused)), char **argv)
 	if (num_read < 0 && flag.interactive)
 		write(STDERR_FILENO, "\n", 1);
 
+	free(duplicate_buffer);
 	return (0);
 }
