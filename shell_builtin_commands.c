@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
 #include "shell.h"
 
 /**
@@ -29,7 +26,7 @@ void shell_cd(char **args)
  */
 void shell_exit(char **args)
 {
-	if (args != NULL)
+	free(args);
 	exit(0);
 }
 

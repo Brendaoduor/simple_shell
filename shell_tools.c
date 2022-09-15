@@ -1,13 +1,5 @@
-#include <stdio.h>
-#include <stdarg.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include "shell.h"
-#include <stdint.h>
-#include <limits.h>
 
-#define HEX 16
-#define DECIMAL 10
 
 /**
  * _putchar_c - putchar function

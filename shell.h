@@ -5,12 +5,21 @@
 #include <string.h>
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <signal.h>
 
 extern char **__environ;
 int count_token(char *buffer, char *delim);
 char **tokenize_line(char *buffer, char *delim, int token_no);
 void _puts(char *str);
-void exec_argv(char **arg, char **argv, int count);
+void exec_cmd(char **arg, char **argv, int count);
 char *_getenv(const char *name);
 char *_strchr(char *str, int c);
 void print_PATH(char *envVar, char *delim);
@@ -57,17 +66,6 @@ typedef struct builtins
 } builtins;
 
 /**
- * struct aliases - description for the aliases in our shell
- * @alias_name: the name we are searching for
- * @real_name: the actual name that would be returned from the shell
- */
-typedef struct aliases
-{
-	char *alias_name;
-	char *real_name;
-} alias;
-
-/**
  * struct flags - struct to determine interactive vs non
  * interactive mode
  * @interactive: Mode type
@@ -92,7 +90,7 @@ int exec_builtin_commands(char **argv);
 char **tokenize_PATH(char *envVar, char *delim);
 char *find_path(char **pathTokens, char **argv);
 char *append_to_directory(char *directory, char **argv, char *character);
-void prompt(void);
+int prompt(void);
 void ctrl_C(int signum);
 int print(char *var, int fd);
 char *command_dir(char **cmd);

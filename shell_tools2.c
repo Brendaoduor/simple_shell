@@ -1,6 +1,4 @@
 #include "shell.h"
-#include <stdint.h>
-#include <limits.h>
 
 /**
  * unsignedNumberToString - As the name implies

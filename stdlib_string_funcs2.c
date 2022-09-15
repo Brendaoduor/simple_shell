@@ -1,7 +1,4 @@
-#include <stdio.h>
-#include <string.h>
 #include "shell.h"
-#include <stdlib.h>
 
 /**
  * _strchr - function that finds the character we are seaching

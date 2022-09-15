@@ -1,11 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <signal.h>
 #include "shell.h"
-#include <unistd.h>
-#include <sys/stat.h>
-#include <sys/types.h>
 
 /**
  * count_token - Finds the number of substrings in a string
@@ -16,7 +9,7 @@
 
 int count_token(char *buffer, char *delim)
 {
-	char *token;
+	char *token = NULL;
 	int token_no = 0;
 
 
@@ -45,7 +38,7 @@ int count_token(char *buffer, char *delim)
 char **tokenize_line(char *buffer, char *delim, int token_no)
 {
 	char *token = NULL;
-	char **argv;
+	char **argv = NULL;
 	int a = 0;
 
 	argv = malloc(sizeof(char *) * token_no);
@@ -53,7 +46,6 @@ char **tokenize_line(char *buffer, char *delim, int token_no)
 	if (argv == NULL)
 	{
 		perror("no space allocated\n");
-		free(buffer);
 		exit(EXIT_FAILURE);
 	}
 
@@ -106,13 +98,13 @@ char *command_dir(char **cmd)
 	size_t size = 0;
 	struct stat st;
 	char *commandPath = NULL;
-	char *envPath;
+	char *envPath = NULL;
 	char *cwd = NULL;
-	char **pathTokens;
+	char **pathTokens = NULL;
 
 	envPath = _getenv("PATH");
 	pathTokens = tokenize_PATH(envPath, DELIM);
-	cwd = getcwd(cwd, size);
+	cwd = getcwd(NULL, size);
 	if (cwd == NULL)
 		return (NULL);
 
@@ -121,11 +113,13 @@ char *command_dir(char **cmd)
 		chdir(pathTokens[i]);
 		if (stat(cmd[0], &st) == 0)
 		{
-		commandPath = append_to_directory(pathTokens[i], cmd, "/");
-			chdir(cwd);
-		break;
+			commandPath = append_to_directory(pathTokens[i], cmd, "/");
+			break;
 		}
 		i++;
 	}
+	chdir(cwd);
+	free(pathTokens);
+	pathTokens = NULL;
 	return (commandPath);
 }

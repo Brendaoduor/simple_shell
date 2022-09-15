@@ -1,9 +1,3 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <stdlib.h>
 #include "shell.h"
 
 /**
@@ -12,13 +6,16 @@
  * Return: Nothing
  */
 
-void prompt(void)
+int prompt(void)
 {
 
 	if ((isatty(STDIN_FILENO) == 1) && (isatty(STDOUT_FILENO) == 1))
 		flag.interactive = 1;
+	else
+		return (0);
 	if (flag.interactive)
 		write(STDOUT_FILENO, "$ ", 2);
+	return (1);
 }
 
 /**
@@ -69,6 +66,7 @@ char **tokenize_PATH(char *envVar, char *delim)
 	}
 	tokenized_path = tokenize_line(envVar, delim, num_substrings);
 
+	/*To remove the "PATH=" at the beginning of first token*/
 	while (tokenized_path[i])
 	{
 		tokenized_path[i] = tokenized_path[i + 1];
@@ -88,7 +86,7 @@ char **tokenize_PATH(char *envVar, char *delim)
 
 char *append_to_directory(char *directory, char **argv, char *character)
 {
-	char *temp;
+	char *temp = NULL;
 	int buff_size;
 
 	buff_size = (_strlen(directory) + _strlen(argv[0] + 2));
@@ -107,26 +105,30 @@ char *append_to_directory(char *directory, char **argv, char *character)
 }
 
 /**
- * exec_argv - Function to execute command
+ * exec_cmd - Function to execute command
  * @arg: An array of commands to be executed
  * @argv: Argument vectors from main.c
  * @count: Argument counter
  * Return: Nothing
  */
 
-void exec_argv(char **arg, char **argv, int count)
+void exec_cmd(char **arg, char **argv, int count)
 {
 	pid_t pid;
-	char *cmd_path;
-	int ch = '/';
-	int status;
+	char *cmd = NULL;
+	int ch = '/', status;
 
 	if (exec_builtin_commands(arg) == 0)
 		return;
-	/*cmd_path = command_dir(argv);*/
-	cmd_path = arg[0];
 	if (_strchr(arg[0], ch) == NULL)
-		cmd_path = append_to_directory("/bin", arg, "/");
+		cmd = append_to_directory("/bin", arg, "/");
+
+/*if ((cmd_path = command_dir(arg)) == NULL)*/
+/* _printf("%s: %i: %s: not found\n", argv[0], count, arg[0]);*/
+/*free(cmd_path);*/
+/*return;*/
+	else
+		cmd = arg[0];
 
 	pid = fork();
 	if (pid == -1)
@@ -136,18 +138,13 @@ void exec_argv(char **arg, char **argv, int count)
 	}
 	else if (pid == 0)
 	{
-		if (execve(cmd_path, arg, __environ) == -1)
+		if (execve(cmd, arg, __environ) == -1)
 		{
 			_printf("%s: %i: %s: not found\n", argv[0], count, arg[0]);
 			exit(EXIT_FAILURE);
 		}
 	}
-	else
-	{
-		waitpid(pid, &status, WUNTRACED);
-		free(cmd_path);
-		cmd_path = NULL;
-		free(arg);
-		arg = NULL;
-	}
+	waitpid(pid, &status, WUNTRACED);
+	free(cmd), cmd = NULL;
+	free(arg), arg = NULL;
 }
